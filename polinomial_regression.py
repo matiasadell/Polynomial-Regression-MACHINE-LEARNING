@@ -7,8 +7,8 @@ import pandas as pd
 
 # Importar el data set
 dataset = pd.read_csv('Position_Salaries.csv')
-X = dataset.iloc[:, 1:2].values         # Agarra de la columna 1 a la 2 para que la reconozca como matriz y no como vector
-y = dataset.iloc[:, 2].values           # Agarra la columna 2
+X = dataset.iloc[:, 1:2].values        
+y = dataset.iloc[:, 2].values           
 
 
 # Dividir el data set en conjunto de entrenamiento y conjunto de testing
@@ -30,7 +30,7 @@ lin_reg.fit(X, y)
 
 # Ajustar la regresión polinómica con el dataset
 from sklearn.preprocessing import PolynomialFeatures
-poly_reg = PolynomialFeatures(degree = 4)       # Regresion polinomica de grado 4, cuanto mayor sea mas preciso va a ser
+poly_reg = PolynomialFeatures(degree = 4)       
 X_poly = poly_reg.fit_transform(X)
 lin_reg_2 = LinearRegression()
 lin_reg_2.fit(X_poly, y)
@@ -44,9 +44,8 @@ plt.ylabel("Sueldo (en $)")
 plt.show()
 
 # Visualización de los resultados del Modelo Polinómico
-X_grid = np.arange(min(X), max(X), 0.1)     # El vector de datos intermedios
-# La minima posicion que es 1, a la maxima posicion que es 10 con intervalos de 0.1
-X_grid = X_grid.reshape(len(X_grid), 1)     # Lo pasa a columna y el 1 es la cantidad de columnas
+X_grid = np.arange(min(X), max(X), 0.1)   
+X_grid = X_grid.reshape(len(X_grid), 1)    
 plt.scatter(X, y, color = "red")
 plt.plot(X_grid, lin_reg_2.predict(poly_reg.fit_transform(X_grid)), color = "blue")
 plt.title("Modelo de Regresión Polinómica")
@@ -55,12 +54,5 @@ plt.ylabel("Sueldo (en $)")
 plt.show()
 
 # Predicción de nuestros modelos
-# Se ha añadido la sintaxis de doble corchete necesaria para hacer la predicción en las últimas versiones de Python (3.7+)
-lin_reg.predict([[6.5]])        # Nuestro modelo lineal nos va a dar un valor cualquiera 
-lin_reg_2.predict(poly_reg.fit_transform([[6.5]]))      # Pero el polinomico nos dio un valor mucho mas preciso
-
-
-
-
-
-
+lin_reg.predict([[6.5]])       
+lin_reg_2.predict(poly_reg.fit_transform([[6.5]]))    
